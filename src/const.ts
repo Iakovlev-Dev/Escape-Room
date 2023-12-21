@@ -15,7 +15,7 @@ export enum AuthorisaionStatus {
 
 export const SortByType = {
   all: 'Все квесты',
-  adventures: 'Приключения',
+  adventure: 'Приключения',
   horror: 'Ужасы',
   mystic: 'Мистика',
   detective: 'Детектив',
@@ -27,4 +27,10 @@ export const SortByLevel = {
   easy: 'Легкий',
   middle: 'Средний',
   hard: 'Сложный',
+};
+
+export const LevelQuest = {
+  easy: 'Легкий',
+  medium: 'Средний',
+  hard: 'Сложный'
 };

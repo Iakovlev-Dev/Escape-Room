@@ -13,15 +13,15 @@ export default function PageBooking () {
         <div className="decorated-page__decor" aria-hidden="true">
           <picture>
             <source
-              type="image/webp"
-              srcSet="img/content/maniac/maniac-bg-size-m.webp, img/content/maniac/maniac-bg-size-m@2x.webp 2x"
+              type='image/webp'
+              srcSet='img/content/maniac/maniac-bg-size-m.webp'
             />
             <img
-              src="img/content/maniac/maniac-bg-size-m.jpg"
-              srcSet="img/content/maniac/maniac-bg-size-m@2x.jpg 2x"
+              src='img/content/maniac/maniac-bg-size-m.jpg'
+              srcSet='img/content/maniac/maniac-bg-size-m@2x.jpg'
               width={1366}
               height={1959}
-              alt=""
+              alt=''
             />
           </picture>
         </div>
@@ -61,7 +61,6 @@ export default function PageBooking () {
                       id="today9h45m"
                       name="date"
                       required
-                      defaultValue="today9h45m"
                     />
                     <span className="custom-radio__label">9:45</span>
                   </label>

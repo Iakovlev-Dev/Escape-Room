@@ -47,7 +47,7 @@ export default function App ({props}: AppProps) {
           />
           <Route
             path={AppRoute.Quest}
-            element={<PageQuest />}
+            element={<PageQuest prop = {props}/>}
           />
           <Route
             path={AppRoute.Contacts}
