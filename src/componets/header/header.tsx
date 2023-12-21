@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
+
 export default function Header () {
   return (
     <header className="header">
@@ -10,19 +13,19 @@ export default function Header () {
         <nav className="main-nav header__main-nav">
           <ul className="main-nav__list">
             <li className="main-nav__item">
-              <a className="link active" href="index.html">
+              <Link className="link" to={AppRoute.Main}>
             Квесты
-              </a>
+              </Link>
             </li>
             <li className="main-nav__item">
-              <a className="link" href="contacts.html">
+              <Link className="link" to={AppRoute.Contacts}>
             Контакты
-              </a>
+              </Link>
             </li>
             <li className="main-nav__item">
-              <a className="link" href="my-quests.html">
+              <Link className="link" to={AppRoute.Reservation}>
             Мои бронирования
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

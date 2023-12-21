@@ -1,6 +1,14 @@
+import { Helmet } from 'react-helmet-async';
+import Footer from '../../componets/footer/footer';
+import Header from '../../componets/header/header';
+
 export default function PageMain () {
   return (
     <div className="wrapper">
+      <Header />
+      <Helmet>
+        <title>Escape Room</title>
+      </Helmet>
       <main className="page-content">
         <div className="container">
           <div className="page-content__title-wrapper">
@@ -556,6 +564,7 @@ export default function PageMain () {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
