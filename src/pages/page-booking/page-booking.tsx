@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
 
@@ -5,6 +6,9 @@ export default function PageBooking () {
   return (
     <div className="wrapper">
       <Header />
+      <Helmet>
+        <title>Escape Room. Booking</title>
+      </Helmet>
       <main className="page-content decorated-page">
         <div className="decorated-page__decor" aria-hidden="true">
           <picture>
