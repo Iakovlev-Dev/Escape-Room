@@ -1,14 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
 import { QuestsMinArrayType } from '../../types/type-quest';
 import ListQuests from '../../componets/list-quests/list-quests';
+import SortingByType from '../../componets/sorting-by-type/sorting-by-type';
+import SortingByLevel from '../../componets/sorting-by-level/sorting-by-level';
+import { useState } from 'react';
+import { SortByType } from '../../const';
 
 type PageMainProp = {
   prop: QuestsMinArrayType;
 }
 
 export default function PageMain ({prop}: PageMainProp) {
+
+  const [sortType, setSortType] = useState(SortByType.all);
+
+  function handleChangeSort (sort: string) {
+    setSortType(SortByType[sort]);
+  }
 
   return (
     <div className="wrapper">
@@ -20,7 +31,7 @@ export default function PageMain ({prop}: PageMainProp) {
         <div className="container">
           <div className="page-content__title-wrapper">
             <h1 className="subtitle page-content__subtitle">
-        квесты в Санкт-Петербурге
+        Квесты в Санкт-Петербурге
             </h1>
             <h2 className="title title--size-m page-content__title">
         Выберите тематику
@@ -30,121 +41,11 @@ export default function PageMain ({prop}: PageMainProp) {
             <form className="filter" action="#" method="get">
               <fieldset className="filter__section">
                 <legend className="visually-hidden">Тематика</legend>
-                <ul className="filter__list">
-                  <li className="filter__item">
-                    <input type="radio" name="type" id="all" />
-                    <label className="filter__label" htmlFor="all">
-                      <svg
-                        className="filter__icon"
-                        width={26}
-                        height={30}
-                        aria-hidden="true"
-                      >
-                        <use xlinkHref="#icon-all-quests" />
-                      </svg>
-                      <span className="filter__label-text">Все квесты</span>
-                    </label>
-                  </li>
-                  <li className="filter__item">
-                    <input type="radio" name="type" id="adventure" />
-                    <label className="filter__label" htmlFor="adventure">
-                      <svg
-                        className="filter__icon"
-                        width={36}
-                        height={30}
-                        aria-hidden="true"
-                      >
-                        <use xlinkHref="#icon-adventure" />
-                      </svg>
-                      <span className="filter__label-text">Приключения</span>
-                    </label>
-                  </li>
-                  <li className="filter__item">
-                    <input type="radio" name="type" id="horror" />
-                    <label className="filter__label" htmlFor="horror">
-                      <svg
-                        className="filter__icon"
-                        width={30}
-                        height={30}
-                        aria-hidden="true"
-                      >
-                        <use xlinkHref="#icon-horror" />
-                      </svg>
-                      <span className="filter__label-text">Ужасы</span>
-                    </label>
-                  </li>
-                  <li className="filter__item">
-                    <input type="radio" name="type" id="mystic" />
-                    <label className="filter__label" htmlFor="mystic">
-                      <svg
-                        className="filter__icon"
-                        width={30}
-                        height={30}
-                        aria-hidden="true"
-                      >
-                        <use xlinkHref="#icon-mystic" />
-                      </svg>
-                      <span className="filter__label-text">Мистика</span>
-                    </label>
-                  </li>
-                  <li className="filter__item">
-                    <input type="radio" name="type" id="detective" />
-                    <label className="filter__label" htmlFor="detective">
-                      <svg
-                        className="filter__icon"
-                        width={40}
-                        height={30}
-                        aria-hidden="true"
-                      >
-                        <use xlinkHref="#icon-detective" />
-                      </svg>
-                      <span className="filter__label-text">Детектив</span>
-                    </label>
-                  </li>
-                  <li className="filter__item">
-                    <input type="radio" name="type" id="sciFi" />
-                    <label className="filter__label" htmlFor="sciFi">
-                      <svg
-                        className="filter__icon"
-                        width={28}
-                        height={30}
-                        aria-hidden="true"
-                      >
-                        <use xlinkHref="#icon-sci-fi" />
-                      </svg>
-                      <span className="filter__label-text">Sci-fi</span>
-                    </label>
-                  </li>
-                </ul>
+                <SortingByType onChange={handleChangeSort} />
               </fieldset>
               <fieldset className="filter__section">
                 <legend className="visually-hidden">Сложность</legend>
-                <ul className="filter__list">
-                  <li className="filter__item">
-                    <input type="radio" name="level" id="any" />
-                    <label className="filter__label" htmlFor="any">
-                      <span className="filter__label-text">Любой</span>
-                    </label>
-                  </li>
-                  <li className="filter__item">
-                    <input type="radio" name="level" id="easy" />
-                    <label className="filter__label" htmlFor="easy">
-                      <span className="filter__label-text">Лёгкий</span>
-                    </label>
-                  </li>
-                  <li className="filter__item">
-                    <input type="radio" name="level" id="middle" />
-                    <label className="filter__label" htmlFor="middle">
-                      <span className="filter__label-text">Средний</span>
-                    </label>
-                  </li>
-                  <li className="filter__item">
-                    <input type="radio" name="level" id="hard" />
-                    <label className="filter__label" htmlFor="hard">
-                      <span className="filter__label-text">Сложный</span>
-                    </label>
-                  </li>
-                </ul>
+                <SortingByLevel />
               </fieldset>
             </form>
           </div>

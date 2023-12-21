@@ -7,7 +7,7 @@ export type BookingInfoType = {
     id: string;
     location: {
         address: string;
-        coords: [number, number];
+        coords?: [number, number];
     };
     slots: {
         today: SlotType[];

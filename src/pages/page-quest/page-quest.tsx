@@ -1,8 +1,22 @@
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
+import { Link, useParams } from 'react-router-dom';
+import { QuestsMinArrayType } from '../../types/type-quest';
+import { LevelQuest } from '../../const';
 
-export default function PageQuest () {
+type QuestType = {
+  prop: QuestsMinArrayType;
+}
+
+export default function PageQuest ({prop}: QuestType) {
+
+  const {id} = useParams();
+
+  const pathQuest = `/quest/${id as string}/booking`;
+
+  const selectedQuest = prop.find((quest) => quest.id === id);
+
   return (
 
     <div className="wrapper">
@@ -10,26 +24,27 @@ export default function PageQuest () {
       <Helmet>
         <title>Escape Room. Quest</title>
       </Helmet>
+      { selectedQuest &&
       <main className="decorated-page quest-page">
         <div className="decorated-page__decor" aria-hidden="true">
           <picture>
             <source
               type="image/webp"
-              srcSet="img/content/maniac/maniac-size-m.webp, img/content/maniac/maniac-size-m@2x.webp 2x"
+              srcSet={selectedQuest.coverImgWebp}
             />
             <img
-              src="img/content/maniac/maniac-size-m.jpg"
-              srcSet="img/content/maniac/maniac-size-m@2x.jpg 2x"
+              src={selectedQuest.coverImg}
+              srcSet={selectedQuest.coverImg}
               width={1366}
               height={768}
-              alt=""
+              alt={selectedQuest.title}
             />
           </picture>
         </div>
         <div className="container container--size-l">
           <div className="quest-page__content">
             <h1 className="title title--size-l title--uppercase quest-page__title">
-        Маньяк
+              {selectedQuest?.title}
             </h1>
             <p className="subtitle quest-page__subtitle">
               <span className="visually-hidden">Жанр:</span>Ужасы
@@ -39,33 +54,25 @@ export default function PageQuest () {
                 <svg width={11} height={14} aria-hidden="true">
                   <use xlinkHref="#icon-person" />
                 </svg>
-          3–6&nbsp;чел
+                {selectedQuest?.peopleMinMax[0]} – {selectedQuest.peopleMinMax[1]}&nbsp;чел
               </li>
               <li className="tags__item">
                 <svg width={14} height={14} aria-hidden="true">
                   <use xlinkHref="#icon-level" />
                 </svg>
-          Средний
+                {selectedQuest && LevelQuest[selectedQuest.level]}
               </li>
             </ul>
-            <p className="quest-page__description">
-        В&nbsp;комнате с&nbsp;приглушённым светом несколько человек, незнакомых
-        друг с&nbsp;другом, приходят в&nbsp;себя. Никто не&nbsp;помнит, что
-        произошло прошлым вечером. Руки и&nbsp;ноги связаны, но&nbsp;одному
-        из&nbsp;вас получилось освободиться. На&nbsp;стене висит пугающий таймер
-        и&nbsp;запущен отсчёт 60&nbsp;минут. Сможете&nbsp;ли вы&nbsp;разобраться
-        в&nbsp;стрессовой ситуации, помочь другим, разобраться что произошло
-        и&nbsp;выбраться из&nbsp;комнаты?
-            </p>
-            <a
+            <p className="quest-page__description">{selectedQuest.description}</p>
+            <Link
               className="btn btn--accent btn--cta quest-page__btn"
-              href="booking.html"
+              to={pathQuest}
             >
         Забронировать
-            </a>
+            </Link>
           </div>
         </div>
-      </main>
+      </main>}
       <Footer />
     </div>
 

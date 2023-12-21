@@ -1,9 +1,21 @@
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
+import { useParams } from 'react-router-dom';
+import { BookingInfoType } from '../../types/type-booking';
+import { QuestsMinArrayType } from '../../types/type-quest';
+import BookingSlot from '../../componets/booking-slot/booking-slot';
 
-export default function PageBooking () {
-  return (
+type PageBookingType = {
+  book: BookingInfoType[];
+  quest: QuestsMinArrayType;
+}
+
+export default function PageBooking ({book, quest}: PageBookingType) {
+  const {id} = useParams();
+  const selectedBooking = book.find((item) => item.id === id);
+  const selectedQuest = quest.find((item) => item.id === id);
+  return (selectedBooking && selectedQuest &&
     <div className="wrapper">
       <Header />
       <Helmet>
@@ -13,15 +25,15 @@ export default function PageBooking () {
         <div className="decorated-page__decor" aria-hidden="true">
           <picture>
             <source
-              type="image/webp"
-              srcSet="img/content/maniac/maniac-bg-size-m.webp, img/content/maniac/maniac-bg-size-m@2x.webp 2x"
+              type='image/webp'
+              srcSet={selectedQuest.coverImgWebp}
             />
             <img
-              src="img/content/maniac/maniac-bg-size-m.jpg"
-              srcSet="img/content/maniac/maniac-bg-size-m@2x.jpg 2x"
+              src={selectedQuest.coverImg}
+              srcSet={selectedQuest.coverImg}
               width={1366}
               height={1959}
-              alt=""
+              alt=''
             />
           </picture>
         </div>
@@ -31,7 +43,7 @@ export default function PageBooking () {
         Бронирование квеста
             </h1>
             <p className="title title--size-m title--uppercase page-content__title">
-        Маньяк
+              {selectedQuest.title}
             </p>
           </div>
           <div className="page-content__item">
@@ -40,8 +52,7 @@ export default function PageBooking () {
                 <div className="map__container" />
               </div>
               <p className="booking-map__address">
-          Вы&nbsp;выбрали: наб. реки Карповки&nbsp;5, лит&nbsp;П, м.
-          Петроградская
+                {selectedBooking.location.address}
               </p>
             </div>
           </div>
@@ -55,115 +66,13 @@ export default function PageBooking () {
               <fieldset className="booking-form__date-section">
                 <legend className="booking-form__date-title">Сегодня</legend>
                 <div className="booking-form__date-inner-wrapper">
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="today9h45m"
-                      name="date"
-                      required
-                      defaultValue="today9h45m"
-                    />
-                    <span className="custom-radio__label">9:45</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="today15h00m"
-                      name="date"
-                      defaultChecked
-                      required
-                      defaultValue="today15h00m"
-                    />
-                    <span className="custom-radio__label">15:00</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="today17h30m"
-                      name="date"
-                      required
-                      defaultValue="today17h30m"
-                    />
-                    <span className="custom-radio__label">17:30</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="today19h30m"
-                      name="date"
-                      required
-                      defaultValue="today19h30m"
-                      disabled
-                    />
-                    <span className="custom-radio__label">19:30</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="today21h30m"
-                      name="date"
-                      required
-                      defaultValue="today21h30m"
-                    />
-                    <span className="custom-radio__label">21:30</span>
-                  </label>
+                  {selectedBooking.slots.today.map((item) => <BookingSlot key={item.time} slot={item}/>)}
                 </div>
               </fieldset>
               <fieldset className="booking-form__date-section">
                 <legend className="booking-form__date-title">Завтра</legend>
                 <div className="booking-form__date-inner-wrapper">
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="tomorrow11h00m"
-                      name="date"
-                      required
-                      defaultValue="tomorrow11h00m"
-                    />
-                    <span className="custom-radio__label">11:00</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="tomorrow15h00m"
-                      name="date"
-                      required
-                      defaultValue="tomorrow15h00m"
-                      disabled
-                    />
-                    <span className="custom-radio__label">15:00</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="tomorrow17h30m"
-                      name="date"
-                      required
-                      defaultValue="tomorrow17h30m"
-                      disabled
-                    />
-                    <span className="custom-radio__label">17:30</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="tomorrow19h45m"
-                      name="date"
-                      required
-                      defaultValue="tomorrow19h45m"
-                    />
-                    <span className="custom-radio__label">19:45</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="tomorrow21h30m"
-                      name="date"
-                      required
-                      defaultValue="tomorrow21h30m"
-                    />
-                    <span className="custom-radio__label">21:30</span>
-                  </label>
+                  {selectedBooking.slots.tomorrow.map((item) => <BookingSlot key={item.time} slot={item}/>)}
                 </div>
               </fieldset>
             </fieldset>
@@ -219,7 +128,7 @@ export default function PageBooking () {
                   </svg>
                 </span>
                 <span className="custom-checkbox__label">
-            Со&nbsp;мной будут дети
+            Со мной будут дети
                 </span>
               </label>
             </fieldset>
