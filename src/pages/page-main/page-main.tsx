@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
@@ -5,12 +6,20 @@ import { QuestsMinArrayType } from '../../types/type-quest';
 import ListQuests from '../../componets/list-quests/list-quests';
 import SortingByType from '../../componets/sorting-by-type/sorting-by-type';
 import SortingByLevel from '../../componets/sorting-by-level/sorting-by-level';
+import { useState } from 'react';
+import { SortByType } from '../../const';
 
 type PageMainProp = {
   prop: QuestsMinArrayType;
 }
 
 export default function PageMain ({prop}: PageMainProp) {
+
+  const [sortType, setSortType] = useState(SortByType.all);
+
+  function handleChangeSort (sort: string) {
+    setSortType(SortByType[sort]);
+  }
 
   return (
     <div className="wrapper">
@@ -32,7 +41,7 @@ export default function PageMain ({prop}: PageMainProp) {
             <form className="filter" action="#" method="get">
               <fieldset className="filter__section">
                 <legend className="visually-hidden">Тематика</legend>
-                <SortingByType />
+                <SortingByType onChange={handleChangeSort} />
               </fieldset>
               <fieldset className="filter__section">
                 <legend className="visually-hidden">Сложность</legend>

@@ -2,12 +2,14 @@ import { SortByType } from '../../const';
 
 type SortTypeProps = {
     sort: string;
+    onChange: (sort: string) => void;
 }
 
-export default function SortingByTypeElement ({sort}: SortTypeProps) {
+export default function SortingByTypeElement ({sort, onChange}: SortTypeProps) {
+
   return (
     <li className="filter__item">
-      <input type="radio" name="type" id={sort} />
+      <input type="radio" name="type" id={sort} onClick={() => onChange(sort)} />
       <label className="filter__label" htmlFor={sort}>
         <svg
           className="filter__icon"
