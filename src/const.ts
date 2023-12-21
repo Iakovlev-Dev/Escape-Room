@@ -12,3 +12,19 @@ export enum AuthorisaionStatus {
     NoAuth = 'NO_AUTH',
     Unknow = 'UNKNOW'
 }
+
+export const SortByType = {
+  all: 'Все квесты',
+  adventures: 'Приключения',
+  horror: 'Ужасы',
+  mystic: 'Мистика',
+  detective: 'Детектив',
+  sciFi: 'Sci-fi'
+};
+
+export const SortByLevel = {
+  any: 'Любой',
+  easy: 'Легкий',
+  middle: 'Средний',
+  hard: 'Сложный',
+};
