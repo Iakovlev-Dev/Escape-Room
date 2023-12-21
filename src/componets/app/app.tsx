@@ -9,15 +9,21 @@ import PageQuest from '../../pages/page-quest/page-quest';
 import PageContacts from '../../pages/page-contacts/page-contacts';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import { HelmetProvider } from 'react-helmet-async';
+import { QuestMinType } from '../../types/type-quest';
 
-export default function App () {
+type AppProps = {
+  props: QuestMinType[];
+}
+
+export default function App ({props}: AppProps) {
+
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<PageMain />}
+            element={<PageMain prop = {props}/>}
           />
           <Route
             path={AppRoute.Login}
