@@ -5,8 +5,6 @@ import { QuestsMinArrayType } from '../../types/type-quest';
 import ListQuests from '../../componets/list-quests/list-quests';
 import SortingByType from '../../componets/sorting-by-type/sorting-by-type';
 import SortingByLevel from '../../componets/sorting-by-level/sorting-by-level';
-import { useState } from 'react';
-import { SortByType } from '../../const';
 
 type PageMainProp = {
   prop: QuestsMinArrayType;
@@ -14,11 +12,6 @@ type PageMainProp = {
 
 export default function PageMain ({prop}: PageMainProp) {
 
-  const [sortType, setSortType] = useState(SortByType.all);
-
-  function handleChangeSort (sort: string) {
-    setSortType(SortByType[sort]);
-  }
 
   return (
     <div className="wrapper">
@@ -40,7 +33,7 @@ export default function PageMain ({prop}: PageMainProp) {
             <form className="filter" action="#" method="get">
               <fieldset className="filter__section">
                 <legend className="visually-hidden">Тематика</legend>
-                <SortingByType onChange={handleChangeSort} />
+                <SortingByType />
               </fieldset>
               <fieldset className="filter__section">
                 <legend className="visually-hidden">Сложность</legend>
@@ -50,7 +43,7 @@ export default function PageMain ({prop}: PageMainProp) {
           </div>
           <h2 className="title visually-hidden">Выберите квест</h2>
           <div className="cards-grid">
-            <ListQuests propQuests = {prop} sortType = { sortType} />
+            <ListQuests propQuests = {prop} />
           </div>
         </div>
       </main>
