@@ -1,21 +1,21 @@
 import { useState } from 'react';
-import { QuestMinType, QuestsMinArrayType } from '../../types/type-quest';
+import { QuestMinType } from '../../types/type-quest';
 import QuestCard from '../quest-card/quest-card';
+import { useAppSelector } from '../../store/hooks';
+import { selectQuests } from '../../store/data-process/selectors';
 
-type ListQuestsType = {
-    propQuests: QuestsMinArrayType;
-    sortType: string | null;
-}
-
-export default function ListQuests ({ propQuests, sortType }: ListQuestsType) {
+export default function ListQuests () {
   const [, setHoverQuestId] = useState<QuestMinType['id'] | null>(null);
 
   function handleQuestHover (questId: QuestMinType['id'] | null) {
     setHoverQuestId(questId);
   }
+
+  const quests = useAppSelector((state) => selectQuests(state));
+
   return (
     <>
-      {propQuests.map((quest) => <QuestCard key={quest.id} quest={quest} onQuestHover={handleQuestHover}/>)}
+      {quests.map((quest) => <QuestCard key={quest.id} quest={quest} onQuestHover={handleQuestHover}/>)}
     </>
   );
 }

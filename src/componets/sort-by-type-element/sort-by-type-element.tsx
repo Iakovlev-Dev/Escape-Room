@@ -1,15 +1,29 @@
 import { SortByType } from '../../const';
+import { setSortType } from '../../store/data-process/data-process';
+import { selectActiveSortType } from '../../store/data-process/selectors';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 type SortTypeProps = {
     sort: string;
-    onChange: (sort: string) => void;
 }
 
-export default function SortingByTypeElement ({sort, onChange}: SortTypeProps) {
+export default function SortingByTypeElement ({sort}: SortTypeProps) {
+  const dispatch = useAppDispatch();
 
+  function handleChangeSortType (sortType: string) {
+    dispatch(setSortType(sortType));
+  }
+  const checkedSortType = useAppSelector((state) => selectActiveSortType(state));
   return (
     <li className="filter__item">
-      <input type="radio" name="type" id={sort} onClick={() => onChange(sort)} />
+      <input type="radio"
+        name="type"
+        id={sort}
+        onChange={() => {
+          handleChangeSortType(sort);
+        }}
+        checked= {checkedSortType === sort}
+      />
       <label className="filter__label" htmlFor={sort}>
         <svg
           className="filter__icon"
@@ -18,6 +32,7 @@ export default function SortingByTypeElement ({sort, onChange}: SortTypeProps) {
           aria-hidden="true"
         >
           {sort === 'sciFi' ? <use xlinkHref={'#icon-sci-fi'} /> : <use xlinkHref={`#icon-${sort}`} />}
+          {sort === 'all' ? <use xlinkHref={'#icon-all-quests'} /> : <use xlinkHref={`#icon-${sort}`} />}
         </svg>
         <span className="filter__label-text">{SortByType[sort]}</span>
       </label>
