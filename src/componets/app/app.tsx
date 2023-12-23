@@ -1,6 +1,6 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import PageMain from '../../pages/page-main/page-main';
-import { AppRoute, AuthorisaionStatus } from '../../const';
+import { AppRoute } from '../../const';
 import PageLogin from '../../pages/page-login/page-login';
 import PrivateRoute from '../private-route/private-route';
 import PageMyQuests from '../../pages/page-reservation/page-reservation';
@@ -9,12 +9,14 @@ import PageQuest from '../../pages/page-quest/page-quest';
 import PageContacts from '../../pages/page-contacts/page-contacts';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import { HelmetProvider } from 'react-helmet-async';
+import HistoryRouter from '../history-route/history-route';
+import { browserHistory } from '../../browser-history';
 
 export default function App () {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Main}
@@ -27,7 +29,7 @@ export default function App () {
           <Route
             path={AppRoute.Reservation}
             element={
-              <PrivateRoute authorisationStatus={AuthorisaionStatus.NoAuth}>
+              <PrivateRoute >
                 <PageMyQuests />
               </PrivateRoute>
             }
@@ -35,7 +37,7 @@ export default function App () {
           <Route
             path={AppRoute.Booking}
             element={
-              <PrivateRoute authorisationStatus={AuthorisaionStatus.Auth}>
+              <PrivateRoute >
                 <PageBooking />
               </PrivateRoute>
             }
@@ -53,9 +55,7 @@ export default function App () {
             element={<PageNotFound />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
-
-
   );
 }

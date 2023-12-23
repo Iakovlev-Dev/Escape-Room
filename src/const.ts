@@ -7,6 +7,13 @@ export enum AppRoute {
     Contacts = '/contacts'
 }
 
+export enum APIRoute {
+  Login = '/v1/escape-room/login',
+  Logout = '/v1/escape-room/logout',
+  Reservation = '/v1/escape-room/reservation',
+  Quest = '/v1/escape-room/quest',
+}
+
 export enum AuthorisaionStatus {
     Auth = 'AUTH',
     NoAuth = 'NO_AUTH',
