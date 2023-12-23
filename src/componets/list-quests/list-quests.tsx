@@ -4,9 +4,10 @@ import QuestCard from '../quest-card/quest-card';
 
 type ListQuestsType = {
     propQuests: QuestsMinArrayType;
+    sortType: string | null;
 }
 
-export default function ListQuests ({ propQuests }: ListQuestsType) {
+export default function ListQuests ({ propQuests, sortType }: ListQuestsType) {
   const [, setHoverQuestId] = useState<QuestMinType['id'] | null>(null);
 
   function handleQuestHover (questId: QuestMinType['id'] | null) {
