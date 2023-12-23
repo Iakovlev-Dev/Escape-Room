@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
@@ -51,7 +50,7 @@ export default function PageMain ({prop}: PageMainProp) {
           </div>
           <h2 className="title visually-hidden">Выберите квест</h2>
           <div className="cards-grid">
-            <ListQuests propQuests = {prop}/>
+            <ListQuests propQuests = {prop} sortType = { sortType} />
           </div>
         </div>
       </main>
