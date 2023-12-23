@@ -34,3 +34,8 @@ export const LevelQuest = {
   medium: 'Средний',
   hard: 'Сложный'
 };
+
+export const NameSpace = {
+  User: 'USER',
+  Data: 'DATA'
+};

@@ -1,5 +1,6 @@
 import { SortByType } from '../../const';
-import { changeSortByType } from '../../store/action';
+import { setSortType } from '../../store/data-process/data-process';
+import { selectActiveSortType } from '../../store/data-process/selectors';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 type SortTypeProps = {
@@ -10,9 +11,9 @@ export default function SortingByTypeElement ({sort}: SortTypeProps) {
   const dispatch = useAppDispatch();
 
   function handleChangeSortType (sortType: string) {
-    dispatch(changeSortByType(sortType));
+    dispatch(setSortType(sortType));
   }
-  const checkedSortType = useAppSelector((state) => state.sortType);
+  const checkedSortType = useAppSelector((state) => selectActiveSortType(state));
   return (
     <li className="filter__item">
       <input type="radio"

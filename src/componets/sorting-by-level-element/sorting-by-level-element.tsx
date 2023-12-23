@@ -1,5 +1,6 @@
 import { SortByLevel } from '../../const';
-import { changeSortByLevel } from '../../store/action';
+import { setSortLevel } from '../../store/data-process/data-process';
+import { selectActiveSortLevel } from '../../store/data-process/selectors';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 type SortLevelElement = {
@@ -11,9 +12,9 @@ export default function SortingByLevelElement ({sort} : SortLevelElement) {
   const dispatch = useAppDispatch();
 
   function handleChangeSortLevel (sortType: string) {
-    dispatch(changeSortByLevel(sortType));
+    dispatch(setSortLevel(sortType));
   }
-  const checkedSortLevel = useAppSelector((state) => state.sortLevel);
+  const checkedSortLevel = useAppSelector((state) => selectActiveSortLevel(state));
   return (
     <li className="filter__item">
       <input

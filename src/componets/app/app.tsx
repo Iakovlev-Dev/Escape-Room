@@ -9,15 +9,8 @@ import PageQuest from '../../pages/page-quest/page-quest';
 import PageContacts from '../../pages/page-contacts/page-contacts';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import { HelmetProvider } from 'react-helmet-async';
-import { QuestMinType } from '../../types/type-quest';
-import { BookingInfoType } from '../../types/type-booking';
 
-type AppProps = {
-  props: QuestMinType[];
-  book: BookingInfoType[];
-}
-
-export default function App ({props, book}: AppProps) {
+export default function App () {
 
   return (
     <HelmetProvider>
@@ -25,7 +18,7 @@ export default function App ({props, book}: AppProps) {
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<PageMain prop = {props}/>}
+            element={<PageMain />}
           />
           <Route
             path={AppRoute.Login}
@@ -43,13 +36,13 @@ export default function App ({props, book}: AppProps) {
             path={AppRoute.Booking}
             element={
               <PrivateRoute authorisationStatus={AuthorisaionStatus.Auth}>
-                <PageBooking book={book} quest={props}/>
+                <PageBooking />
               </PrivateRoute>
             }
           />
           <Route
             path={AppRoute.Quest}
-            element={<PageQuest prop = {props}/>}
+            element={<PageQuest />}
           />
           <Route
             path={AppRoute.Contacts}

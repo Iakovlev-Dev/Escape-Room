@@ -2,19 +2,18 @@ import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
 import { useParams } from 'react-router-dom';
-import { BookingInfoType } from '../../types/type-booking';
-import { QuestsMinArrayType } from '../../types/type-quest';
+
 import BookingSlot from '../../componets/booking-slot/booking-slot';
+import { useAppSelector } from '../../store/hooks';
+import { selectBooking, selectQuests } from '../../store/data-process/selectors';
 
-type PageBookingType = {
-  book: BookingInfoType[];
-  quest: QuestsMinArrayType;
-}
 
-export default function PageBooking ({book, quest}: PageBookingType) {
+export default function PageBooking () {
+  const quests = useAppSelector((state) => selectQuests(state));
+  const booking = useAppSelector((state) => selectBooking(state));
   const {id} = useParams();
-  const selectedBooking = book.find((item) => item.id === id);
-  const selectedQuest = quest.find((item) => item.id === id);
+  const selectedBooking = booking.find((item) => item.id === id);
+  const selectedQuest = quests.find((item) => item.id === id);
   return (selectedBooking && selectedQuest &&
     <div className="wrapper">
       <Header />

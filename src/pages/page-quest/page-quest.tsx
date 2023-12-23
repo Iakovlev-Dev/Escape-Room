@@ -2,20 +2,19 @@ import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
 import { Link, useParams } from 'react-router-dom';
-import { QuestsMinArrayType } from '../../types/type-quest';
 import { LevelQuest } from '../../const';
+import { useAppSelector } from '../../store/hooks';
+import { selectQuests } from '../../store/data-process/selectors';
 
-type QuestType = {
-  prop: QuestsMinArrayType;
-}
 
-export default function PageQuest ({prop}: QuestType) {
+export default function PageQuest () {
+  const quests = useAppSelector((state) => selectQuests(state));
 
   const {id} = useParams();
 
   const pathQuest = `/quest/${id as string}/booking`;
 
-  const selectedQuest = prop.find((quest) => quest.id === id);
+  const selectedQuest = quests.find((quest) => quest.id === id);
 
   return (
 

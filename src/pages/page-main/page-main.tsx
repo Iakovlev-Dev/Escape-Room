@@ -1,16 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
-import { QuestsMinArrayType } from '../../types/type-quest';
 import ListQuests from '../../componets/list-quests/list-quests';
 import SortingByType from '../../componets/sorting-by-type/sorting-by-type';
 import SortingByLevel from '../../componets/sorting-by-level/sorting-by-level';
 
-type PageMainProp = {
-  prop: QuestsMinArrayType;
-}
 
-export default function PageMain ({prop}: PageMainProp) {
+export default function PageMain () {
 
 
   return (
@@ -43,7 +39,7 @@ export default function PageMain ({prop}: PageMainProp) {
           </div>
           <h2 className="title visually-hidden">Выберите квест</h2>
           <div className="cards-grid">
-            <ListQuests propQuests = {prop} />
+            <ListQuests />
           </div>
         </div>
       </main>
