@@ -12,6 +12,10 @@ export default function SortingByLevelElement ({sort} : SortLevelElement) {
   const dispatch = useAppDispatch();
 
   function handleChangeSortLevel (sortType: string) {
+    if (sortType === 'middle') {
+      dispatch(setSortLevel('medium'));
+      return;
+    }
     dispatch(setSortLevel(sortType));
   }
   const checkedSortLevel = useAppSelector((state) => selectActiveSortLevel(state));
@@ -24,7 +28,8 @@ export default function SortingByLevelElement ({sort} : SortLevelElement) {
         onChange={()=> {
           handleChangeSortLevel(sort);
         }}
-        checked = {checkedSortLevel === sort}
+        checked = {checkedSortLevel === sort }
+
       />
       <label className="filter__label" htmlFor={sort}>
         <span className="filter__label-text">{SortByLevel[sort]}</span>

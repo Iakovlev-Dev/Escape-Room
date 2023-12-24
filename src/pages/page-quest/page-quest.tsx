@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
 import { Link, useParams } from 'react-router-dom';
-import { LevelQuest } from '../../const';
+import { SortByLevel } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectCurrentQuest } from '../../store/data-process/selectors';
 import { fetchBookingAction, fetchQuestAction } from '../../store/api-action';
@@ -65,7 +65,7 @@ export default function PageQuest () {
                 <svg width={14} height={14} aria-hidden="true">
                   <use xlinkHref="#icon-level" />
                 </svg>
-                {currentQuest && LevelQuest[currentQuest.level]}
+                {currentQuest && SortByLevel[currentQuest.level]}
               </li>
             </ul>
             <p className="quest-page__description">{currentQuest.description}</p>

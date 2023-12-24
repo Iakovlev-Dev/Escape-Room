@@ -1,4 +1,4 @@
-import { SortByType } from '../../const';
+import { SortByType, SortType } from '../../const';
 import { setSortType } from '../../store/data-process/data-process';
 import { selectActiveSortType } from '../../store/data-process/selectors';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -34,7 +34,7 @@ export default function SortingByTypeElement ({sort}: SortTypeProps) {
           {sort === 'sciFi' ? <use xlinkHref={'#icon-sci-fi'} /> : <use xlinkHref={`#icon-${sort}`} />}
           {sort === 'all' ? <use xlinkHref={'#icon-all-quests'} /> : <use xlinkHref={`#icon-${sort}`} />}
         </svg>
-        <span className="filter__label-text">{SortByType[sort]}</span>
+        <span className="filter__label-text">{sort === SortType.SciFi ? 'Sci-fi' : SortByType[sort]}</span>
       </label>
     </li>
   );
