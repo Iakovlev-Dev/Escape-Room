@@ -57,6 +57,5 @@ export const SortLevel: SortBy<string> = {
 
 
 export const NameSpace = {
-  User: 'USER',
   Data: 'DATA'
 };

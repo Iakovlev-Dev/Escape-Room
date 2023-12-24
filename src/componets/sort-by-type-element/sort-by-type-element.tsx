@@ -13,7 +13,7 @@ export default function SortingByTypeElement ({sort}: SortTypeProps) {
   function handleChangeSortType (sortType: string) {
     dispatch(setSortType(sortType));
   }
-  const checkedSortType = useAppSelector((state) => selectActiveSortType(state));
+  const checkedSortType = useAppSelector(selectActiveSortType);
   return (
     <li className="filter__item">
       <input type="radio"

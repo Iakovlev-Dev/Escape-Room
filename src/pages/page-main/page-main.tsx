@@ -4,14 +4,9 @@ import Header from '../../componets/header/header';
 import ListQuests from '../../componets/list-quests/list-quests';
 import SortingByType from '../../componets/sorting-by-type/sorting-by-type';
 import SortingByLevel from '../../componets/sorting-by-level/sorting-by-level';
-import { fetchQuestsAction } from '../../store/api-action';
-import { useAppDispatch } from '../../store/hooks';
-
 
 export default function PageMain () {
 
-  const dispatch = useAppDispatch();
-  dispatch(fetchQuestsAction());
   return (
     <div className="wrapper">
       <Header />
