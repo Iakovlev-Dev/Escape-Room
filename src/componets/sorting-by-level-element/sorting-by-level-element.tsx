@@ -18,7 +18,7 @@ export default function SortingByLevelElement ({sort} : SortLevelElement) {
     }
     dispatch(setSortLevel(sortType));
   }
-  const checkedSortLevel = useAppSelector((state) => selectActiveSortLevel(state));
+  const checkedSortLevel = useAppSelector(selectActiveSortLevel);
   return (
     <li className="filter__item">
       <input
