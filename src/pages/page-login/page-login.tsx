@@ -1,8 +1,31 @@
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
+import { FormEvent, useRef } from 'react';
+import { useAppDispatch } from '../../store/hooks';
+import { loginAction } from '../../store/api-action';
+import { AuthData } from '../../types/type-auth-data';
 
 export default function PageLogin () {
+  const dispatch = useAppDispatch();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const onSubmit = (authData: AuthData) => {
+    dispatch(loginAction(authData));
+  };
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    if(emailRef.current !== null && passwordRef.current !== null) {
+      onSubmit({
+        login: emailRef.current.value,
+        password: passwordRef.current.value
+      });
+    }
+
+  };
+
   return (
     <div className="wrapper">
       <Header />
@@ -31,6 +54,7 @@ export default function PageLogin () {
               className="login-form"
               action="https://echo.htmlacademy.ru/"
               method="post"
+              onSubmit={handleSubmit}
             >
               <div className="login-form__inner-wrapper">
                 <h1 className="title title--size-s login-form__title">Вход</h1>
@@ -45,11 +69,12 @@ export default function PageLogin () {
                       name="email"
                       placeholder="Адрес электронной почты"
                       required
+                      ref={emailRef}
                     />
                   </div>
                   <div className="custom-input login-form__input">
                     <label className="custom-input__label" htmlFor="password">
-                Пароль
+                  Пароль
                     </label>
                     <input
                       type="password"
@@ -57,6 +82,7 @@ export default function PageLogin () {
                       name="password"
                       placeholder="Пароль"
                       required
+                      ref={passwordRef}
                     />
                   </div>
                 </div>
@@ -64,7 +90,7 @@ export default function PageLogin () {
                   className="btn btn--accent btn--general login-form__submit"
                   type="submit"
                 >
-            Войти
+                Войти
                 </button>
               </div>
               <label className="custom-checkbox login-form__checkbox">

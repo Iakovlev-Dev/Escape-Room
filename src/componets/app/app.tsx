@@ -11,9 +11,12 @@ import PageNotFound from '../../pages/page-not-found/page-not-found';
 import { HelmetProvider } from 'react-helmet-async';
 import HistoryRouter from '../history-route/history-route';
 import { browserHistory } from '../../browser-history';
+import { useAppSelector } from '../../store/hooks';
+import { selectAuthStatus } from '../../store/data-process/selectors';
 
 export default function App () {
-
+  console.log(useAppSelector(selectAuthStatus));
+  
   return (
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>
