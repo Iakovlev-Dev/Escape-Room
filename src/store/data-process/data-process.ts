@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthorisaionStatus, NameSpace } from '../../const';
 import { DataProcess } from '../../types/type-store';
-import { checkAuthAction, fetchBookingAction, fetchQuestAction, fetchQuestsAction } from '../api-action';
+import { checkAuthAction, fetchBookingAction, fetchQuestAction, fetchQuestsAction, loginAction, logoutAction } from '../api-action';
 import { QuestsMinArrayType } from '../../types/type-quest';
 
 export const initialState: DataProcess = {
@@ -43,6 +43,18 @@ export const dataProcess = createSlice({
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.authorizationStatus = AuthorisaionStatus.NoAuth;
+      })
+      .addCase(loginAction.fulfilled, (state) => {
+        state.authorizationStatus = AuthorisaionStatus.Auth;
+      })
+      .addCase(loginAction.rejected, (state) => {
+        state.authorizationStatus = AuthorisaionStatus.NoAuth;
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.authorizationStatus = AuthorisaionStatus.NoAuth;
+      })
+      .addCase(logoutAction.rejected, (state) => {
+        state.authorizationStatus = AuthorisaionStatus.Auth;
       });
   },
 });

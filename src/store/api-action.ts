@@ -41,12 +41,11 @@ export const fetchQuestAction = createAsyncThunk<QuestMaxType, string, ApiAction
   }
 );
 
-export const loginAction = createAsyncThunk<UserData, AuthData, ApiAction>('loginAction',
+export const loginAction = createAsyncThunk<void, AuthData, ApiAction>('loginAction',
   async({login: email, password}, {extra: api, dispatch}) => {
     const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
     setToken(data.token);
     dispatch(redirectToRoute(AppRoute.Main));
-    return data;
   }
 );
 

@@ -44,7 +44,7 @@ export const createAPI = (): AxiosInstance => {
       }
       return Promise.reject(error);
     }
-  )
+  );
 
   return api;
 };

@@ -4,9 +4,10 @@ import AuthUser from '../auth-user/auth-user';
 import NoAuthUser from '../no-auth-user/no-user-auth';
 
 export default function Header () {
+  const isAuth = useAppSelector(isUserAuthorezed);
   return (
     <header className="header">
-      {useAppSelector(isUserAuthorezed) ? <AuthUser /> : <NoAuthUser />}
+      {isAuth ? <AuthUser /> : <NoAuthUser />}
     </header>
   );
 }
