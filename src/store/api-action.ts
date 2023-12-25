@@ -57,10 +57,9 @@ export const logoutAction = createAsyncThunk<void, undefined, ApiAction>('logout
   }
 );
 
-export const myReservation = createAsyncThunk<ReservationType[] | null, undefined, ApiAction>('myReservation', 
+export const myReservation = createAsyncThunk<ReservationType[] | null, undefined, ApiAction>('myReservation',
   async(_arg, {extra: api}) => {
     const {data} = await api.get<ReservationType[]>(APIRoute.Reservation);
-    console.log(data);
     return data;
   }
 );

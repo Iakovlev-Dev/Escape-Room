@@ -45,3 +45,4 @@
 Добавил action login и logout - 1 час
 День 6. 
 Подключение page-booking к серверу - 1 час
+Добавление карточек reservation - 1 час
