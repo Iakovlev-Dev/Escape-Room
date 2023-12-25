@@ -1,9 +1,11 @@
-import { NameSpace } from '../../const';
-import { State } from '../../types/type-store';
+import { AuthorisaionStatus, NameSpace } from '../../const';
+import { StateType } from '../../types/type-store';
 
 
-export const selectActiveSortType = (state: State) => state[NameSpace.Data].sortType;
-export const selectActiveSortLevel = (state: State) => state[NameSpace.Data].sortLevel;
-export const selectQuests = (state: State) => state[NameSpace.Data].quests;
-export const selectBooking = (state: State) => state[NameSpace.Data].booking;
-export const selectCurrentQuest = (state: State) => state[NameSpace.Data].quest;
+export const selectActiveSortType = (state: StateType) => state[NameSpace.Data].sortType;
+export const selectActiveSortLevel = (state: StateType) => state[NameSpace.Data].sortLevel;
+export const selectQuests = (state: StateType) => state[NameSpace.Data].quests;
+export const selectBooking = (state: StateType) => state[NameSpace.Data].booking;
+export const selectCurrentQuest = (state: StateType) => state[NameSpace.Data].quest;
+export const selectAuthStatus = (state: StateType) => state[NameSpace.Data].authorizationStatus;
+export const isUserAuthorezed = (state: StateType) => state[NameSpace.Data].authorizationStatus === AuthorisaionStatus.Auth;

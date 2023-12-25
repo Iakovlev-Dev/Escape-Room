@@ -20,29 +20,42 @@ export enum AuthorisaionStatus {
     Unknow = 'UNKNOW'
 }
 
-export const SortByType = {
+export const SortByType: SortBy<string> = {
   all: 'Все квесты',
-  adventure: 'Приключения',
+  adventures: 'Приключения',
   horror: 'Ужасы',
   mystic: 'Мистика',
   detective: 'Детектив',
   sciFi: 'Sci-fi'
 };
 
-export const SortByLevel = {
+export const SortType: SortBy<string> = {
+  All: 'all',
+  Adventures: 'adventures',
+  Horror: 'horror',
+  Mystic: 'mystic',
+  Detective: 'detective',
+  SciFi: 'sci-fi'
+};
+interface SortBy <T>{
+  [key: string]: T;
+}
+
+export const SortByLevel: SortBy<string> = {
   any: 'Любой',
   easy: 'Легкий',
-  middle: 'Средний',
+  medium: 'Средний',
   hard: 'Сложный',
 };
 
-export const LevelQuest = {
-  easy: 'Легкий',
-  medium: 'Средний',
-  hard: 'Сложный'
+export const SortLevel: SortBy<string> = {
+  Any: 'any',
+  Easy: 'easy',
+  Medium: 'medium',
+  Hard: 'hard',
 };
 
+
 export const NameSpace = {
-  User: 'USER',
   Data: 'DATA'
 };

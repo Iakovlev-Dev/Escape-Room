@@ -1,26 +1,17 @@
 import { Link } from 'react-router-dom';
 import { QuestMinType } from '../../types/type-quest';
-import { LevelQuest } from '../../const';
+import { SortByLevel } from '../../const';
 
 type QuestCardType = {
     quest: QuestMinType;
-    onQuestHover?: (questId: QuestMinType['id'] | null) => void;
 }
 
-export default function QuestCard ({quest, onQuestHover} : QuestCardType) {
+export default function QuestCard ({quest} : QuestCardType) {
   const {level, peopleMinMax, previewImg, previewImgWebp, title, id} = quest;
   const pathQuest = `/quest/${id}`;
 
-  function handleMouseEnter () {
-    onQuestHover?.(id);
-  }
-
-  function handleMouseLeave () {
-    onQuestHover?.(null);
-  }
-
   return (
-    <div className="quest-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className="quest-card" >
       <div className="quest-card__img">
         <picture>
           <source
@@ -53,7 +44,7 @@ export default function QuestCard ({quest, onQuestHover} : QuestCardType) {
             <svg width={14} height={14} aria-hidden="true">
               <use xlinkHref="#icon-level" />
             </svg>
-            {LevelQuest[level]}
+            {SortByLevel[level]}
           </li>
         </ul>
       </div>
