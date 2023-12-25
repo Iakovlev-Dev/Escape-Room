@@ -9,3 +9,5 @@ export const selectBooking = (state: StateType) => state[NameSpace.Data].booking
 export const selectCurrentQuest = (state: StateType) => state[NameSpace.Data].quest;
 export const selectAuthStatus = (state: StateType) => state[NameSpace.Data].authorizationStatus;
 export const isUserAuthorezed = (state: StateType) => state[NameSpace.Data].authorizationStatus === AuthorisaionStatus.Auth;
+export const selectCurrentBooking = (state: StateType) => state[NameSpace.Data].currentBooking;
+export const selectMyReservation = (state: StateType) => state[NameSpace.Data].myReservation;

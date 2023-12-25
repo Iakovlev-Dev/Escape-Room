@@ -8,6 +8,7 @@ import { UserData } from '../types/type-user-data';
 import { AuthData } from '../types/type-auth-data';
 import { dropToken, setToken } from '../services/token';
 import { redirectToRoute } from './action';
+import { ReservationType } from '../types/type-reservation';
 
 type ApiAction = {
     dispatch: AppDispatch;
@@ -53,5 +54,13 @@ export const logoutAction = createAsyncThunk<void, undefined, ApiAction>('logout
   async(_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
+  }
+);
+
+export const myReservation = createAsyncThunk<ReservationType[] | null, undefined, ApiAction>('myReservation', 
+  async(_arg, {extra: api}) => {
+    const {data} = await api.get<ReservationType[]>(APIRoute.Reservation);
+    console.log(data);
+    return data;
   }
 );

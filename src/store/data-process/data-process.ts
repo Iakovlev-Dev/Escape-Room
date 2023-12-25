@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthorisaionStatus, NameSpace } from '../../const';
 import { DataProcess } from '../../types/type-store';
-import { checkAuthAction, fetchBookingAction, fetchQuestAction, fetchQuestsAction, loginAction, logoutAction } from '../api-action';
+import { checkAuthAction, fetchBookingAction, fetchQuestAction, fetchQuestsAction, loginAction, logoutAction, myReservation } from '../api-action';
 import { QuestsMinArrayType } from '../../types/type-quest';
 
 export const initialState: DataProcess = {
@@ -9,8 +9,10 @@ export const initialState: DataProcess = {
   sortLevel: 'any',
   quests: [],
   booking: [],
+  currentBooking: null,
   quest: null,
-  authorizationStatus: AuthorisaionStatus.Unknow
+  authorizationStatus: AuthorisaionStatus.Unknow,
+  myReservation: null
 };
 
 export const dataProcess = createSlice({
@@ -34,6 +36,7 @@ export const dataProcess = createSlice({
       })
       .addCase(fetchBookingAction.fulfilled, (state, action)=> {
         state.booking = action.payload;
+        state.currentBooking = action.payload[0];
       })
       .addCase(fetchQuestAction.fulfilled, (state, action) => {
         state.quest = action.payload;
@@ -55,6 +58,9 @@ export const dataProcess = createSlice({
       })
       .addCase(logoutAction.rejected, (state) => {
         state.authorizationStatus = AuthorisaionStatus.Auth;
+      })
+      .addCase(myReservation.fulfilled, (state, action) => {
+        state.myReservation = action.payload;
       });
   },
 });
