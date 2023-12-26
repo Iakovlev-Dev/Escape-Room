@@ -1,8 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
+import Map from '../../componets/map/map';
 
 export default function PageContacts () {
+
   return (
     <div className="wrapper">
       <Header />
@@ -67,8 +69,10 @@ export default function PageContacts () {
               </div>
             </dl>
             <div className="contacts__map">
-              <div className="map">
-                <div className="map__container" />
+              <div className="map" >
+                <div className="map__container">
+                  <Map page='contact' />
+                </div>
               </div>
             </div>
           </div>

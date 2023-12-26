@@ -1,11 +1,13 @@
 import BookingSlot from '../../componets/booking-slot/booking-slot';
-import { selectCurrentBooking } from '../../store/data-process/selectors';
-import { useAppSelector } from '../../store/hooks';
+import { BookingInfoType } from '../../types/type-booking';
 
-export default function FormBooking () {
-  const currentBooking = useAppSelector(selectCurrentBooking);
+type FormBooking = {
+  booking: BookingInfoType;
+}
 
-  return (currentBooking &&
+export default function FormBooking ({booking}: FormBooking) {
+
+  return (
     <form
       className="booking-form"
       action="https://echo.htmlacademy.ru/"
@@ -16,13 +18,13 @@ export default function FormBooking () {
         <fieldset className="booking-form__date-section">
           <legend className="booking-form__date-title">Сегодня</legend>
           <div className="booking-form__date-inner-wrapper">
-            {currentBooking.slots.today.map((day) => <BookingSlot key={day.time} slot={day}/>)}
+            {booking?.slots.today.map((day) => <BookingSlot key={day.time} slot={day}/>)}
           </div>
         </fieldset>
         <fieldset className="booking-form__date-section">
           <legend className="booking-form__date-title">Завтра</legend>
           <div className="booking-form__date-inner-wrapper">
-            {currentBooking.slots.tomorrow.map((day) => <BookingSlot key={day.time} slot={day}/>)}
+            {booking?.slots.tomorrow.map((day) => <BookingSlot key={day.time} slot={day}/>)}
           </div>
         </fieldset>
       </fieldset>

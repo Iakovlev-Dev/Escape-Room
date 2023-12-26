@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../store/hooks';
 import { logoutAction } from '../../store/api-action';
+import { setQuestId } from '../../store/data-process/data-process';
 
 export default function AuthUser () {
   const dispatch = useAppDispatch();
 
   const handleLogOut = () => {
     dispatch(logoutAction());
+    dispatch(setQuestId(null));
   };
 
   return (
