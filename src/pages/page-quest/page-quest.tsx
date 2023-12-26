@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectCurrentQuest } from '../../store/data-process/selectors';
 import { fetchBookingAction, fetchQuestAction } from '../../store/api-action';
 import { useEffect } from 'react';
+import { setQuestId } from '../../store/data-process/data-process';
 
 export default function PageQuest () {
   const dispatch = useAppDispatch();
@@ -17,6 +18,7 @@ export default function PageQuest () {
   useEffect(() => {
     dispatch(fetchBookingAction(id as string));
     dispatch(fetchQuestAction(id as string));
+    dispatch(setQuestId(id as string));
   }, [dispatch, id]);
 
   const currentQuest = useAppSelector(selectCurrentQuest);

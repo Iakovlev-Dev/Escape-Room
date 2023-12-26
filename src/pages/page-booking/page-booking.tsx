@@ -2,16 +2,19 @@ import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
 import { useAppSelector } from '../../store/hooks';
-import { selectCurrentBooking, selectCurrentQuest } from '../../store/data-process/selectors';
+import { selectBooking, selectCurrentQuest, selectQuestPlaceId } from '../../store/data-process/selectors';
 import FormBooking from '../../componets/form-booking/form-booking';
 import Map from '../../componets/map/map';
 
 
 export default function PageBooking () {
   const currentQuest = useAppSelector(selectCurrentQuest);
-  const currentBooking = useAppSelector(selectCurrentBooking);
+  const booking = useAppSelector(selectBooking);
+  const currentid = useAppSelector(selectQuestPlaceId);
+  const currentBooking = booking?.find((item) => item.id === currentid);
 
-  return (currentQuest && currentBooking &&
+
+  return (currentQuest &&
     <div className="wrapper">
       <Header />
       <Helmet>
@@ -46,15 +49,15 @@ export default function PageBooking () {
             <div className="booking-map">
               <div className="map">
                 <div className="map__container">
-                  <Map page='booking'/>
+                  {booking && <Map page='booking' booking={booking}/>}
                 </div>
               </div>
               <p className="booking-map__address">
-                {currentBooking.location.address}
+                {currentBooking && currentBooking.location.address}
               </p>
             </div>
           </div>
-          <FormBooking />
+          {currentBooking && <FormBooking booking={currentBooking}/>}
         </div>
       </main>
       <Footer />

@@ -2,7 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthorisaionStatus, NameSpace } from '../../const';
 import { DataProcess } from '../../types/type-store';
 import { checkAuthAction, fetchBookingAction, fetchQuestAction, fetchQuestsAction, loginAction, logoutAction, myReservation } from '../api-action';
-import { QuestsMinArrayType } from '../../types/type-quest';
+import { QuestMinType, QuestsMinArrayType } from '../../types/type-quest';
+import { BookingInfoType } from '../../types/type-booking';
 
 export const initialState: DataProcess = {
   sortType: 'all',
@@ -12,7 +13,10 @@ export const initialState: DataProcess = {
   currentBooking: null,
   quest: null,
   authorizationStatus: AuthorisaionStatus.Unknow,
-  myReservation: null
+  myReservation: null,
+  questPlaceId: null,
+  coords: [],
+  questId: null
 };
 
 export const dataProcess = createSlice({
@@ -27,7 +31,16 @@ export const dataProcess = createSlice({
     },
     setQuests(state, action: PayloadAction<QuestsMinArrayType>) {
       state.quests = action.payload;
-    }
+    },
+    setQuestId(state, action: PayloadAction<QuestMinType['id'] | null>) {
+      state.questPlaceId = action.payload;
+    },
+    setCoords(state, action: PayloadAction<BookingInfoType['location']['coords']>) {
+      state.coords = action.payload;
+    },
+    setQuestPlaceId(state, action: PayloadAction<string>) {
+      state.questPlaceId = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -65,4 +78,4 @@ export const dataProcess = createSlice({
   },
 });
 
-export const {setSortType, setSortLevel, setQuests} = dataProcess.actions;
+export const {setSortType, setSortLevel, setQuests, setQuestId, setCoords, setQuestPlaceId} = dataProcess.actions;

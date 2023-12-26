@@ -2,10 +2,16 @@ import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { CoordsOffice, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { BookingInfoType } from '../../types/type-booking';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { selectCoordsQuestPlaces } from '../../store/data-process/selectors';
+import { setCoords, setQuestPlaceId } from '../../store/data-process/data-process';
 
 
 type Map = {
     page: 'contact' | 'booking';
+    booking?: BookingInfoType[];
 }
 
 const defaultCustomIcon = new Icon({
@@ -21,7 +27,22 @@ const currentCustomIcon = new Icon({
 });
 
 
-export default function Map ({page}: Map) {
+export default function Map ({page, booking}: Map) {
+  const dispatch = useAppDispatch();
+  const coordsQuestPlaces = useAppSelector(selectCoordsQuestPlaces);
+  useEffect(() => {
+    if(booking) {
+      const currentQuestPlaceId = booking[0].id;
+      const currentCoordQuestPlace = booking[0].location.coords;
+      dispatch(setQuestPlaceId(currentQuestPlaceId));
+      dispatch(setCoords(currentCoordQuestPlace));
+    }
+  }, [booking, dispatch]);
+
+  function handleClickMarker (id: BookingInfoType['id'], coords: BookingInfoType['location']['coords']) {
+    dispatch(setQuestPlaceId(id));
+    dispatch(setCoords(coords));
+  }
 
   return (
     <MapContainer
@@ -38,8 +59,19 @@ export default function Map ({page}: Map) {
       {page === 'contact' &&
       <Marker position={CoordsOffice} icon={defaultCustomIcon}/>}
 
-      {page === 'booking' &&
-      <Marker position={CoordsOffice} icon={currentCustomIcon}/>}
+      {page === 'booking' && booking &&
+      booking.map((item) => (
+        <Marker position={item.location.coords}
+          icon={
+            item.location.coords === coordsQuestPlaces
+              ? currentCustomIcon
+              : defaultCustomIcon
+          }
+          key={item.id}
+          eventHandlers={{click: () => handleClickMarker(item.id, item.location.coords)}}
+        />
+      )
+      )}
 
     </MapContainer>
   );

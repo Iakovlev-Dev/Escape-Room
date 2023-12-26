@@ -2,14 +2,19 @@ import { Helmet } from 'react-helmet-async';
 import Footer from '../../componets/footer/footer';
 import Header from '../../componets/header/header';
 import { FormEvent, useRef } from 'react';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { loginAction } from '../../store/api-action';
 import { AuthData } from '../../types/type-auth-data';
+import { isUserAuthorezed, selectQuestId } from '../../store/data-process/selectors';
+import { Navigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 export default function PageLogin () {
   const dispatch = useAppDispatch();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const isAuth = useAppSelector(isUserAuthorezed);
+  const questId = useAppSelector(selectQuestId);
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -25,6 +30,14 @@ export default function PageLogin () {
     }
 
   };
+
+  if (isAuth && (!questId)) {
+    return <Navigate to={AppRoute.Main} />;
+  }
+
+  if (isAuth && (questId)) {
+    return <Navigate to={`/quest/${questId}/booking`} />;
+  }
 
   return (
     <div className="wrapper">
