@@ -12,7 +12,6 @@ export default function PageQuest () {
   const dispatch = useAppDispatch();
 
   const {id} = useParams();
-
   const pathQuest = `/quest/${id as string}/booking`;
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import Header from '../../componets/header/header';
 import { useAppSelector } from '../../store/hooks';
 import { selectCurrentBooking, selectCurrentQuest } from '../../store/data-process/selectors';
 import FormBooking from '../../componets/form-booking/form-booking';
+import Map from '../../componets/map/map';
 
 
 export default function PageBooking () {
@@ -44,7 +45,9 @@ export default function PageBooking () {
           <div className="page-content__item">
             <div className="booking-map">
               <div className="map">
-                <div className="map__container" />
+                <div className="map__container">
+                  <Map page='booking'/>
+                </div>
               </div>
               <p className="booking-map__address">
                 {currentBooking.location.address}

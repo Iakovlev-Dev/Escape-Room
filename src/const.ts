@@ -59,3 +59,10 @@ export const SortLevel: SortBy<string> = {
 export const NameSpace = {
   Data: 'DATA'
 };
+
+export const CoordsOffice: [number, number] = [59.968142, 30.316425];
+
+export const URL_MARKER_DEFAULT = '../../../markup/img/svg/pin-default.svg';
+
+export const URL_MARKER_CURRENT = '../../../markup/img/svg/pin-active.svg';
+
