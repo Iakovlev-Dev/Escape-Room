@@ -1,6 +1,6 @@
 import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { CoordsOffice, URL_MARKER_DEFAULT } from '../../const';
+import { CoordsOffice, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 
 
@@ -14,16 +14,16 @@ const defaultCustomIcon = new Icon({
   iconAnchor: [20,40],
 });
 
-// const currentCustomIcon = new Icon({
-//   iconUrl: URL_MARKER_CURRENT,
-//   iconSize: [40, 40],
-//   iconAnchor: [20,40]
-// });
+const currentCustomIcon = new Icon({
+  iconUrl: URL_MARKER_CURRENT,
+  iconSize: [40, 40],
+  iconAnchor: [20,40]
+});
 
 
 export default function Map ({page}: Map) {
 
-  return (page === 'contact' &&
+  return (
     <MapContainer
       center={CoordsOffice}
       zoom={15}
@@ -34,7 +34,12 @@ export default function Map ({page}: Map) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         url='https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
       />
-      <Marker position={CoordsOffice} icon={defaultCustomIcon}/>
+
+      {page === 'contact' &&
+      <Marker position={CoordsOffice} icon={defaultCustomIcon}/>}
+
+      {page === 'booking' &&
+      <Marker position={CoordsOffice} icon={currentCustomIcon}/>}
 
     </MapContainer>
   );
